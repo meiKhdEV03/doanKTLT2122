@@ -4,7 +4,7 @@ void create_Snake();
 void draw_Snake();
 bool outside(int x, int y);
 void draw_Food();
-void Move(int& i);
+void Move(bool* check);
 void Go_Left();
 void Go_Right();
 void Go_Up();

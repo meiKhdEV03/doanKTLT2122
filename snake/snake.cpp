@@ -3,11 +3,12 @@
 
 #include "Menu.h"
 #include "Playgame.h"
-int i = 0;
+bool check = true;
 int main()
 {
 	FixConsoleWindow();
 	while (1) {
+		check = true;
 		draw_Board();
 		move_Menu();
 		system("cls");
@@ -18,8 +19,8 @@ int main()
 		gotoxy(103, 5);
 		cout << " Score: ";
 		Score();
-		while (i != 1) {
-			Move(i);
+		while (check) {
+			Move(&check);
 			if (Eat()) {
 				Score();
 				Plus_Body();

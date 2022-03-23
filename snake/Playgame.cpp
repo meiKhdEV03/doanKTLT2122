@@ -1,7 +1,7 @@
 #include "Playgame.h"
 #include "Menu.h"
-int direction = 2;
-int bien = -2;
+int direction = 2; //Huong di snake nhan vao
+int temp_drt = 2; //Huong snake di
 int score = 0;
 int speed = 70;
 bool Start = false;
@@ -86,7 +86,7 @@ bool Eat()
 	return false;
 }
 
-void Move(int& i)
+void Move(bool* check)
 {
 	if (_kbhit())
 	{
@@ -103,57 +103,30 @@ void Move(int& i)
 	if (!Start && direction != 2)
 		Start = true;
 	if (Start) {
-		if (bien != -direction) {
-			bien = direction;
-			switch (direction)
-			{
-			case 1: {
-				Go_Up();
-				break;
-			}
-			case -1: {
-				Go_Down();
-				break;
-			}
-			case 2:
-			{
-				Go_Left();
-				break;
-			}
-			default:
-				Go_Right();
-				break;
-			}
+		if (temp_drt != -direction)
+			temp_drt = direction;
+		switch (temp_drt) {
+		case 1: {
+			Go_Up();
+			break;
 		}
-		else
+		case -1: {
+			Go_Down();
+			break;
+		}
+		case 2: {
+			Go_Left();
+			break;
+		}
+		case -2: Go_Right();
+		}
+		if (outside(snake[0].x, snake[0].y) || !alive(snake[0].x, snake[0].y))
 		{
-			switch (bien)
-			{
-			case 1: {
-				Go_Up();
-				break;
-			}
-			case -1: {
-				Go_Down();
-				break;
-			}
-			case 2:
-			{
-				Go_Left();
-				break;
-			}
-			default:
-				Go_Right();
-				break;
-			}
+			gotoxy(45, 12);
+			cout << "You Lose! ";
+			*check = false;
+			Start = false;
 		}
-	}
-	if (outside(snake[0].x, snake[0].y) || !alive(snake[0].x, snake[0].y))
-	{
-		gotoxy(45, 12);
-		cout << "You Lose! ";
-		i = 1;
-		Start = false;
 	}
 }
 void Go_Right()
@@ -223,7 +196,7 @@ void Go_Up()
 	gotoxy(snake[snake.size() - 1].x0, snake[snake.size() - 1].y0);
 	cout << " ";
 	draw_Snake();
-	Sleep(speed/Level());
+	Sleep(speed / Level());
 }
 void Go_Down()
 {

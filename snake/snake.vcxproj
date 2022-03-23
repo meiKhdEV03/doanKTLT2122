@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Hamcpp.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="Playgame.cpp" />
     <ClCompile Include="snake.cpp" />
